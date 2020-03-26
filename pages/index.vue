@@ -4,12 +4,14 @@
       <div @click="increment()">
         <logo />
       </div>
-      <h1 class="title">
+      <h1 class="title" @click="increment()">
         nuxt-typescript
       </h1>
       <h2 class="subtitle" @click="decrement()">
-        My awesome Nuxt.js project. Counter: {{ this.count }}
+        My awesome Nuxt.js project.
       </h2>
+      <h3>Counter: {{ this.count }}</h3>
+      <h3>Fullname: {{ this.fullName }}</h3>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">
           Documentation
@@ -32,11 +34,10 @@ import Logo from '~/components/Logo.vue'
 
 interface User {
   firstName: string
-  lastName: number
+  lastName: string
 }
 
 @Component({
-  // https://vuejs.org/v2/api/#Options-Data
   components: {
     Logo,
   },
@@ -44,7 +45,10 @@ interface User {
 export default class IndexPage extends Vue {
   // Props
   @Prop()
-  readonly user!: User
+  readonly user: User = {
+    firstName: 'John',
+    lastName: 'Doe',
+  }
 
   // Data
   count: number = 0
