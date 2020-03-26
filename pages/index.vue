@@ -11,7 +11,8 @@
         My awesome Nuxt.js project.
       </h2>
       <h3>Counter: {{ this.count }}</h3>
-      <h3>Fullname: {{ this.fullName }}</h3>
+      <User :data="user" />
+      <User2 :data="user" />
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">
           Documentation
@@ -31,6 +32,8 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import Logo from '~/components/Logo.vue'
+import User from '~/components/User.vue'
+import User2 from '~/components/User2.vue'
 
 interface User {
   firstName: string
@@ -40,22 +43,17 @@ interface User {
 @Component({
   components: {
     Logo,
+    User,
+    User2,
   },
 })
 export default class IndexPage extends Vue {
-  // Props
-  @Prop()
-  readonly user: User = {
-    firstName: 'John',
-    lastName: 'Doe',
-  }
-
   // Data
   count: number = 0
   message: string = 'This is a message'
-
-  get fullName(): string {
-    return `${this.user.firstName} ${this.user.lastName}`
+  user: User = {
+    firstName: 'John',
+    lastName: 'Doe',
   }
 
   // Methods will be component methods
