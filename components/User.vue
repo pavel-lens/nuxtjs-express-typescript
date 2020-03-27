@@ -34,6 +34,7 @@ export default Vue.extend({
       type: Number,
       required: false,
       default: 0,
+      // The `number` type is automatticaly inferred, so you don't have to do this:
       // } as PropOptions<number>,
     },
   },
