@@ -30,7 +30,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import Vue, { PropOptions } from 'vue'
+// import { Vue, Component, Prop } from 'vue-property-decorator'
 import Logo from '~/components/Logo.vue'
 import User from '~/components/User.vue'
 import User2 from '~/components/User2.vue'
@@ -40,31 +41,42 @@ interface User {
   lastName: string
 }
 
-@Component({
+export default Vue.extend({
   components: {
     Logo,
     User,
     User2,
   },
+
+  data() {
+    const user: User = {
+      firstName: 'John',
+      lastName: 'Doe',
+    }
+
+    return {
+      count: 0,
+      message: 'This is a message',
+      user,
+    }
+  },
+
+  computed: {
+    fullName(): string {
+      return `${this.user.firstName} ${this.user.lastName}`
+    },
+  },
+
+  methods: {
+    async increment() {
+      this.count++
+    },
+
+    decrement() {
+      this.count--
+    },
+  },
 })
-export default class IndexPage extends Vue {
-  // Data
-  count: number = 0
-  message: string = 'This is a message'
-  user: User = {
-    firstName: 'John',
-    lastName: 'Doe',
-  }
-
-  // Methods will be component methods
-  async increment() {
-    this.count++
-  }
-
-  decrement() {
-    this.count--
-  }
-}
 </script>
 
 <style>
