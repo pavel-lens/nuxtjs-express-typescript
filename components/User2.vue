@@ -1,10 +1,15 @@
 <template>
-  <div>
+  <div class="my-5">
     <h3>User2 details</h3>
-    <div>First Name: {{ data.firstName }}</div>
-    <div>Last Name: {{ data.lastName }}</div>
+    <div>First Name: {{ payload.firstName }}</div>
+    <div>Last Name: {{ payload.lastName }}</div>
     <div>Ful Name: {{ fullName }}</div>
     <div>Message: {{ message }}</div>
+    <div>
+      Counter: {{ formattedCounter }}
+      <button @click="counter += 1">+</button>
+      <button @click="counter -= 1">-</button>
+    </div>
   </div>
 </template>
 
@@ -18,17 +23,38 @@ interface User {
   lastName: string
 }
 
+// Looks like the only drawback with this syntax is that
+// when declaring stateful properties (see `message`, `counter`)
+// you can't leave them uninitialied or assign `undefined`.
+// If you do so, the property will not become reactive.
+// https://class-component.vuejs.org/guide/class-component.html#data
+
 @Component
 export default class User2 extends Vue {
   // Props
   @Prop({ required: true })
-  readonly data!: User
+  readonly payload!: User
+
+  @Prop({ required: false })
+  readonly initialCount: number = 0
 
   // Data
-  message: string = 'This is a message'
+  message = 'This is a message'
+  counter: number = 0
 
   get fullName(): string {
-    return `${this.data.firstName} ${this.data.lastName}`
+    return `${this.payload.firstName} ${this.payload.lastName}`
+  }
+
+  get formattedCounter(): string {
+    return this.counter.toFixed(2)
+  }
+
+  processData() {
+    // You will not be able to change props by mistake. Vetur
+    // this.count += 1
+    // This will complain because Typescript knows that counter is number
+    // this.counter += 'asr'
   }
 }
 </script>

@@ -11,8 +11,8 @@
         My awesome Nuxt.js project.
       </h2>
       <h3>Counter: {{ this.count }}</h3>
-      <User :data="user" />
-      <User2 :data="user" />
+      <User :payload="user" />
+      <User2 :payload="user" />
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">
           Documentation
@@ -97,5 +97,9 @@ export default class IndexPage extends Vue {
 
 .links {
   padding-top: 15px;
+}
+
+.my-5 {
+  margin: 20px 0;
 }
 </style>

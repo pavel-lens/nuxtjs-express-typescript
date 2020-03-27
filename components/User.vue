@@ -1,10 +1,16 @@
 <template>
-  <div>
+  <div class="my-5">
     <h3>User details</h3>
-    <div>First Name: {{ data.firstName }}</div>
-    <div>Last Name: {{ data.lastName }}</div>
+    <div>First Name: {{ payload.firstName }}</div>
+    <div>Last Name: {{ payload.lastName }}</div>
     <div>Ful Name: {{ fullName }}</div>
     <div>Message: {{ message }}</div>
+
+    <div>
+      Counter: {{ formattedCounter }}
+      <button @click="counter += 1">+</button>
+      <button @click="counter -= 1">-</button>
+    </div>
   </div>
 </template>
 
@@ -20,21 +26,44 @@ export default Vue.extend({
   name: 'User',
 
   props: {
-    data: {
+    payload: {
       type: Object,
       required: true,
     } as PropOptions<User>,
+    initialCount: {
+      type: Number,
+      required: false,
+      default: 0,
+      // } as PropOptions<number>,
+    },
   },
 
   data() {
     return {
+      counter: this.initialCount,
       message: 'This is a message',
     }
   },
 
   computed: {
+    // You always have to specify return type!
     fullName(): string {
-      return `${this.data.firstName} ${this.data.lastName}`
+      return `${this.payload.firstName} ${this.payload.lastName}`
+    },
+    upMessage(): string {
+      return this.message.toUpperCase()
+    },
+    formattedCounter(): string {
+      return this.counter.toFixed(2)
+    },
+  },
+
+  methods: {
+    processData() {
+      // You will not be able to change props by mistake. Vetur
+      // this.count += 1
+      // This will complain because Typescript knows that counter is number
+      // this.counter += 'asr'
     },
   },
 })
