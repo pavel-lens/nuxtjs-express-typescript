@@ -80,3 +80,26 @@ This is a class-based component with annotations and native getter class methods
 However, the big limitation is that when declaring a class variable for mutating state (OptionAPI `data() { ... }`), you always have to initialize it with some value. You cannot leave it uninitialized and also you can't assign `undefined` as initialization value, because it will NOT be reactive (Vue will not work as expected).
 
 Also, if you want to initialize your state based on props, you have to use the `data() { ... }` function anyway.
+
+## How Typescript is compiled and how app is served in production
+
+To understand how things work in production, we have to look at two components of the app:
+
+- NuxtJS part
+- ExpressJS backend API
+
+### NuxtJS
+
+NuxtJS is compiled into `.nuxt/dist/` directory which contains `client/` and `server/` directory.
+
+In the `client/` directory, you will find Javascript bundles compiled by Webpack, separated into several chunks. You will also find statics assets like `fonts/`.
+
+The `server` directory contains a `server.js` file which basically handles serving of static files and other Nuxt-related middleware functions. This is wired by `app.use(nuxt.render)` in original `<root>server/index.ts` file.
+
+### ExpressJS backend API
+
+The Express API implemented in `<root>/server/` directory is compiled by Typescript compiler and saved into `<root>/server-dist/` folder.
+
+If you look at `start` script in `package.json` file, you will see the following `node server-dist/index.js`.
+
+That means that in production, there is a `node` server running a compiled version of original `server/index.ts`, but now it's compiled to `server-dist/index.js`.
