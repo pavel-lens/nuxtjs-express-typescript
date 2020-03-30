@@ -47,6 +47,24 @@ $ npm run test:server
 $ npm run test:server:watch
 ```
 
+## Docker
+
+Build docker image from current directory.
+
+```bash
+$ docker build -t nuxt_typescript_app .
+```
+
+Now run the docker image and expose local port `3000`.
+
+```bash
+$ docker run -it -p 3000:3000 nuxt_typescript_app
+```
+
+The application should be accessible at `http://0.0.0.0:3000`
+
+Try to reach baceknd API at `http://0.0.0.0:3000/api/users/`
+
 ## Typescript in Vue components
 
 ### components/User.vue
