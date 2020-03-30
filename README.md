@@ -31,6 +31,22 @@ $ npm run generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
+## Tests
+
+Running frontend and backend tests are separated with following scripts.
+
+```bash
+# run frontend tests
+$ npm run test:client
+# run frontend tests in watch mode
+$ npm run test:client:watch
+
+# run backend tests
+$ npm run test:server
+# run backend tests in watch mode
+$ npm run test:server:watch
+```
+
 ## Typescript in Vue components
 
 ### components/User.vue
