@@ -12,7 +12,10 @@
     "build:server": "tsc -p server/",
     "start": "cross-env NODE_ENV=production node server-dist/index.js",
     "generate": "nuxt generate",
-    "test": "jest"
+    "test:client": "jest",
+    "test:client:watch": "npm run test:client -- --watch",
+    "test:server": "jest --config server/jest.config.js",
+    "test:server:watch": "npm run test:server -- --watch"
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.0",
