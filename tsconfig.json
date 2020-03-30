@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["esnext", "esnext.asynciterable", "dom"],
     // to go around ElementUI problem https://github.com/nuxt/typescript/issues/49
@@ -17,7 +17,14 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@types/node", "@nuxt/types"]
+    "types": ["jest", "@types/node", "@nuxt/types"]
   },
-  "exclude": ["node_modules", ".nuxt", "dist", "server-dist"]
+  "exclude": [
+    "node_modules",
+    ".nuxt",
+    "dist",
+    "server-dist",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

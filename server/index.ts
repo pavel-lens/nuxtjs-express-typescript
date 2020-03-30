@@ -1,3 +1,5 @@
+// Required for 'typedi' module
+import 'reflect-metadata'
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
@@ -6,6 +8,15 @@ const app = express()
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
+
+import { Container } from 'typedi'
+
+// Important to import like this for Service() decorators to be executed
+import './services'
+import routes from './routes'
+
+// Set console as Logger
+Container.set('Logger', console)
 
 async function start() {
   // Init Nuxt.js
@@ -20,6 +31,9 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  // Setup routes
+  app.use('/api', routes)
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
