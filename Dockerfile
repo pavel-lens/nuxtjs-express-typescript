@@ -16,13 +16,14 @@ RUN npm ci
 # since it builds the server as well
 RUN npm run build
 
-# expose 3000 on container
-EXPOSE 3000
+# expose 5000 on container
+# kubernetes: use this port so k8s manager discovers the app properly
+EXPOSE 5000
 
 # set app serving to permissive / assigned
 ENV NUXT_HOST=0.0.0.0
 # set app port
-ENV NUXT_PORT=3000
+ENV NUXT_PORT=5000
 
 # start the app
 CMD [ "npm", "start" ]
