@@ -22,7 +22,7 @@
     "cross-env": "^7.0.2",
     "element-ui": "^2.13.2",
     "express": "^4.17.1",
-    "nuxt": "^2.14.1",
+    "nuxt": "^3.4.3",
     "reflect-metadata": "^0.1.13",
     "typedi": "^0.8.0"
   },
